@@ -5,6 +5,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 import java.util.function.Supplier;
 
@@ -24,6 +25,13 @@ public class Main extends Frame {
 
     private void init() {
         setLayout(new BorderLayout());
+
+        Toolkit toolkit = Toolkit.getDefaultToolkit();
+
+        Image icon64 = toolkit.getImage(getClass().getResource("/icon64.png"));
+        Image icon128 = toolkit.getImage(getClass().getResource("/icon128.png"));
+        List<Image> icons = List.of(icon64, icon128);
+        setIconImages(icons);
 
         var footerPanel = new Panel();
         footerPanel.add(label);
@@ -52,6 +60,8 @@ public class Main extends Frame {
 
     private static void createAndShowGUI() {
         var frame = new Main();
+
+
         frame.setTitle("Easy Typing");
         frame.addWindowListener(new WindowAdapter() {
             @Override
