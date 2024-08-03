@@ -3,38 +3,35 @@ package combine.typing;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.util.concurrent.TimeUnit;
 import java.util.function.Supplier;
 
-public class Main extends JFrame {
+public class Main extends Frame {
 
-    private final JTextArea textArea = new JTextArea(10, 50);
+    private final TextArea textArea = new TextArea("", 10, 50, TextArea.SCROLLBARS_VERTICAL_ONLY);
 
-    private final JScrollPane areaPane = new JScrollPane(textArea);
+    private final Label label = new Label("Delay(ms):");
 
-    private final JPanel footerPanel = new JPanel();
+    private final TextField textField = new TextField("2000", 5);
 
-    private final JLabel label = new JLabel("Delay(ms): ");
-
-    private final JTextField textField = new JTextField(5);
-
-    private final JButton sendButton = new JButton("type");
+    private final Button sendButton = new Button("✍");
 
     private Main() {
         init();
     }
 
     private void init() {
-        textArea.setLineWrap(true);
+        setLayout(new BorderLayout());
 
-        textField.setText("2000");
+        var footerPanel = new Panel();
         footerPanel.add(label);
         footerPanel.add(textField);
         footerPanel.add(sendButton);
 
-        JPanel panel = (JPanel) getContentPane();
-        panel.add(areaPane, BorderLayout.CENTER);
-        panel.add(footerPanel, BorderLayout.PAGE_END);
+        add(textArea, BorderLayout.CENTER);
+        add(footerPanel, BorderLayout.PAGE_END);
 
         sendButton.addActionListener(this::onSend);
     }
@@ -54,19 +51,15 @@ public class Main extends JFrame {
     }
 
     private static void createAndShowGUI() {
-        /*try {
-            String os = System.getProperty("os.name");
-            if (os.contains("Windows")) {
-                UIManager.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsLookAndFeel");
-            }
-        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException |
-                 UnsupportedLookAndFeelException ignored) {
-        }*/
-        JFrame frame = new Main();
+        var frame = new Main();
         frame.setTitle("Easy Typing");
-        frame.setDefaultCloseOperation(EXIT_ON_CLOSE);
+        frame.addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent e) {
+                System.exit(0);
+            }
+        });
         frame.pack();
-        frame.setMinimumSize(new Dimension(360, 200));
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);
     }
