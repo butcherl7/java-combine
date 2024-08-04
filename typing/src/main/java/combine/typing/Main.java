@@ -70,16 +70,17 @@ public class Main extends Frame {
 
     private static void createAndShowGUI() {
         var frame = new Main();
-        frame.setTitle("Easy Typing");
         frame.addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosing(WindowEvent e) {
                 System.exit(0);
             }
         });
+        frame.setTitle("Easy Typing");
+        frame.setAlwaysOnTop(true);
         frame.pack();
-        frame.setLocationRelativeTo(null);
         frame.setVisible(true);
+        frame.setLocationRelativeTo(null);
     }
 
     static <T> T runCatch(Supplier<T> supplier) {
