@@ -13,6 +13,7 @@
     <modules>
         <module>typing</module>
         <module>bilibili</module>
+        <module>webapp</module>
     </modules>
 
     <properties>
