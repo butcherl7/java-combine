@@ -13,11 +13,11 @@ public class Main extends Frame {
 
     private final TextArea textArea = new TextArea("", 10, 50, TextArea.SCROLLBARS_VERTICAL_ONLY);
 
-    private final Label label = new Label("Delay(ms):");
-
     private final TextField textField = new TextField("2000", 5);
 
-    private final Button sendButton = new Button("✍");
+    private final Label label = new Label("Delay(ms):");
+
+    private final Button button = new Button("✍");
 
     private Main() {
         init();
@@ -36,12 +36,12 @@ public class Main extends Frame {
         var footerPanel = new Panel();
         footerPanel.add(label);
         footerPanel.add(textField);
-        footerPanel.add(sendButton);
+        footerPanel.add(button);
 
         add(textArea, BorderLayout.CENTER);
         add(footerPanel, BorderLayout.PAGE_END);
 
-        sendButton.addActionListener(this::onSend);
+        button.addActionListener(this::onSend);
     }
 
     private void onSend(ActionEvent e) {
@@ -52,16 +52,24 @@ public class Main extends Frame {
 
         Integer delay = runCatch(() -> Integer.parseInt(textField.getText()));
 
+        componentEnabled(false);
+
         if (delay != null && delay > 0) {
             sleep(delay);
         }
+
         TypeUtils.typeString(text);
+        componentEnabled(true);
+    }
+
+    private void componentEnabled(boolean enabled) {
+        textArea.setEnabled(enabled);
+        textField.setEnabled(enabled);
+        button.setEnabled(enabled);
     }
 
     private static void createAndShowGUI() {
         var frame = new Main();
-
-
         frame.setTitle("Easy Typing");
         frame.addWindowListener(new WindowAdapter() {
             @Override
