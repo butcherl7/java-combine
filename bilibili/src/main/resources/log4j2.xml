@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- https://logging.apache.org/log4j/2.x/manual/layouts.html -->
+<Configuration status="WARN">
+    <Properties>
+        <Property name="FILE_LOG_PATTERN" value="%d %5p %-5pid [%t] %c{1.} %m %ex%n"/>
+        <!-- %pid: 进程 id -->
+        <property name="CONSOLE_LOG_PATTERN"
+                  value="%d{HH:mm:ss.SSS} %highlight{%5p} %style{%5pid}{magenta} --- [%t] %style{%c{1.}}{#028e8e} - %m%n"/>
+    </Properties>
+    <Appenders>
+        <!--<File name="File" fileName="jTools.log" append="false">
+            <PatternLayout pattern="${FILE_LOG_PATTERN}"/>
+        </File>-->
+        <Console name="Console" target="SYSTEM_OUT">
+            <PatternLayout pattern="${CONSOLE_LOG_PATTERN}"/>
+        </Console>
+    </Appenders>
+    <Loggers>
+        <Root level="trace">
+            <!--<AppenderRef ref="file" level="DEBUG"/>-->
+            <AppenderRef ref="Console" level="INFO"/>
+        </Root>
+        <Logger name="combine.bilibili" level="debug">
+            <AppenderRef ref="Console"/>
+        </Logger>
+    </Loggers>
+</Configuration>

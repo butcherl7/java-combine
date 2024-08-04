@@ -12,6 +12,7 @@
 	
     <modules>
         <module>typing</module>
+        <module>bilibili</module>
     </modules>
 
     <properties>
