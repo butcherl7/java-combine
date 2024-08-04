@@ -3,6 +3,7 @@ package combine.typing;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
+import java.awt.event.ItemEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.util.List;
@@ -11,13 +12,15 @@ import java.util.function.Supplier;
 
 public class Main extends Frame {
 
-    private final TextArea textArea = new TextArea("", 10, 50, TextArea.SCROLLBARS_VERTICAL_ONLY);
+    private static final TextArea textArea = new TextArea("", 10, 50, TextArea.SCROLLBARS_VERTICAL_ONLY);
 
-    private final TextField textField = new TextField("2000", 5);
+    private static final TextField textField = new TextField("2000", 5);
 
-    private final Label label = new Label("Delay(ms):");
+    private static final Label label = new Label("Delay(ms):");
 
-    private final Button button = new Button("✍");
+    private static final Button button = new Button("✍");
+
+    private static final Checkbox checkbox = new Checkbox("Always On Top", true);
 
     private Main() {
         init();
@@ -34,6 +37,7 @@ public class Main extends Frame {
         setIconImages(icons);
 
         var footerPanel = new Panel();
+        footerPanel.add(checkbox);
         footerPanel.add(label);
         footerPanel.add(textField);
         footerPanel.add(button);
@@ -42,6 +46,7 @@ public class Main extends Frame {
         add(footerPanel, BorderLayout.PAGE_END);
 
         button.addActionListener(this::onSend);
+        checkbox.addItemListener(this::onTop);
     }
 
     private void onSend(ActionEvent e) {
@@ -62,6 +67,11 @@ public class Main extends Frame {
         componentEnabled(true);
     }
 
+    private void onTop(ItemEvent e) {
+        boolean onTop = e.getStateChange() == ItemEvent.SELECTED;
+        setAlwaysOnTop(onTop);
+    }
+
     private void componentEnabled(boolean enabled) {
         textArea.setEnabled(enabled);
         textField.setEnabled(enabled);
@@ -77,7 +87,7 @@ public class Main extends Frame {
             }
         });
         frame.setTitle("Easy Typing");
-        frame.setAlwaysOnTop(true);
+        frame.setAlwaysOnTop(checkbox.getState());
         frame.pack();
         frame.setVisible(true);
         frame.setLocationRelativeTo(null);
