@@ -91,6 +91,7 @@ public class Main extends Frame {
         frame.pack();
         frame.setVisible(true);
         frame.setLocationRelativeTo(null);
+        frame.setMinimumSize(textArea.getSize());
     }
 
     static <T> T runCatch(Supplier<T> supplier) {
