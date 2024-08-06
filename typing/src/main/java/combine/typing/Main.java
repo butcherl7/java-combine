@@ -20,7 +20,7 @@ public class Main extends Frame {
 
     private static final Button button = new Button("✍");
 
-    private static final CheckboxMenuItem alwaysOnTopMenu = new CheckboxMenuItem("Always On Top", true);
+    private static final CheckboxMenuItem alwaysOnTopMenu = new CheckboxMenuItem("Always On Top", false);
 
     private Main() {
         init();
@@ -53,9 +53,7 @@ public class Main extends Frame {
     private void setMenuBar() {
         MenuBar menuBar = new MenuBar();
         Menu menu = new Menu("Options");
-
         menu.add(alwaysOnTopMenu);
-
         menuBar.add(menu);
         setMenuBar(menuBar);
     }
