@@ -20,7 +20,7 @@ public class Main extends Frame {
 
     private static final Button button = new Button("✍");
 
-    private static final Checkbox checkbox = new Checkbox("Always On Top", true);
+    private static final CheckboxMenuItem alwaysOnTopMenu = new CheckboxMenuItem("Always On Top", true);
 
     private Main() {
         init();
@@ -29,9 +29,9 @@ public class Main extends Frame {
     private void init() {
         setLayout(new BorderLayout());
         setIcon();
+        setMenuBar();
 
         var footerPanel = new Panel();
-        footerPanel.add(checkbox);
         footerPanel.add(label);
         footerPanel.add(textField);
         footerPanel.add(button);
@@ -50,9 +50,19 @@ public class Main extends Frame {
         setIconImages(icons);
     }
 
+    private void setMenuBar() {
+        MenuBar menuBar = new MenuBar();
+        Menu menu = new Menu("Options");
+
+        menu.add(alwaysOnTopMenu);
+
+        menuBar.add(menu);
+        setMenuBar(menuBar);
+    }
+
     private void addListener() {
         button.addActionListener(this::onSend);
-        checkbox.addItemListener(this::onTop);
+        alwaysOnTopMenu.addItemListener(this::onTop);
     }
 
     // 事件处理...
@@ -95,7 +105,7 @@ public class Main extends Frame {
             }
         });
         frame.setTitle("Easy Typing");
-        frame.setAlwaysOnTop(checkbox.getState());
+        frame.setAlwaysOnTop(alwaysOnTopMenu.getState());
         frame.pack();
         frame.setVisible(true);
         frame.setLocationRelativeTo(null);
