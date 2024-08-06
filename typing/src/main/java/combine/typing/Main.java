@@ -28,13 +28,7 @@ public class Main extends Frame {
 
     private void init() {
         setLayout(new BorderLayout());
-
-        Toolkit toolkit = Toolkit.getDefaultToolkit();
-
-        Image icon64 = toolkit.getImage(getClass().getResource("/icon64.png"));
-        Image icon128 = toolkit.getImage(getClass().getResource("/icon128.png"));
-        List<Image> icons = List.of(icon64, icon128);
-        setIconImages(icons);
+        setIcon();
 
         var footerPanel = new Panel();
         footerPanel.add(checkbox);
@@ -45,9 +39,23 @@ public class Main extends Frame {
         add(textArea, BorderLayout.CENTER);
         add(footerPanel, BorderLayout.PAGE_END);
 
+        addListener();
+    }
+
+    private void setIcon() {
+        Toolkit toolkit = Toolkit.getDefaultToolkit();
+        Image icon64 = toolkit.getImage(getClass().getResource("/icon64.png"));
+        Image icon128 = toolkit.getImage(getClass().getResource("/icon128.png"));
+        List<Image> icons = List.of(icon64, icon128);
+        setIconImages(icons);
+    }
+
+    private void addListener() {
         button.addActionListener(this::onSend);
         checkbox.addItemListener(this::onTop);
     }
+
+    // 事件处理...
 
     private void onSend(ActionEvent e) {
         String text = textArea.getText();
@@ -73,9 +81,9 @@ public class Main extends Frame {
     }
 
     private void componentEnabled(boolean enabled) {
+        button.setEnabled(enabled);
         textArea.setEnabled(enabled);
         textField.setEnabled(enabled);
-        button.setEnabled(enabled);
     }
 
     private static void createAndShowGUI() {
