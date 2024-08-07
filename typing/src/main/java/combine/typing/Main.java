@@ -122,7 +122,7 @@ public class Main extends Frame {
 
     private static void createAndShowGUI() {
         var frame = new Main();
-        frame.addWindowListener(new WindowLDispose());
+        frame.addWindowListener(new WindowLExit());
         frame.setTitle("Easy Typing");
         frame.setAlwaysOnTop(alwaysOnTopMenu.getState());
         frame.pack();
@@ -155,6 +155,13 @@ public class Main extends Frame {
         @Override
         public void windowClosing(WindowEvent e) {
             e.getWindow().dispose();
+        }
+    }
+
+    private static class WindowLExit extends WindowAdapter {
+        @Override
+        public void windowClosing(WindowEvent e) {
+            System.exit(0);
         }
     }
 }
