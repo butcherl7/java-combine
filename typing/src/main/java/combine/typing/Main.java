@@ -51,10 +51,21 @@ public class Main extends Frame {
     }
 
     private void setMenuBar() {
+        Menu menu1 = new Menu("Options");
+        menu1.add(alwaysOnTopMenu);
+
+        MenuItem pidItem = new MenuItem("PID: " + ProcessHandle.current().pid());
+        MenuItem aboutItem = new MenuItem("About");
+        pidItem.setEnabled(false);
+        aboutItem.setEnabled(false);
+
+        Menu menu2 = new Menu("Help");
+        menu2.add(pidItem);
+        menu2.add(aboutItem);
+
         MenuBar menuBar = new MenuBar();
-        Menu menu = new Menu("Options");
-        menu.add(alwaysOnTopMenu);
-        menuBar.add(menu);
+        menuBar.add(menu1);
+        menuBar.add(menu2);
         setMenuBar(menuBar);
     }
 
