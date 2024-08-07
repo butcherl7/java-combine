@@ -22,6 +22,8 @@ public class Main extends Frame {
 
     private static final CheckboxMenuItem alwaysOnTopMenu = new CheckboxMenuItem("Always On Top", false);
 
+    private static final long pid = ProcessHandle.current().pid();
+
     private Main() {
         init();
     }
@@ -54,13 +56,11 @@ public class Main extends Frame {
         Menu menu1 = new Menu("Options");
         menu1.add(alwaysOnTopMenu);
 
-        MenuItem pidItem = new MenuItem("PID: " + ProcessHandle.current().pid());
+        // MenuItem pidItem = new MenuItem("PID: " + ProcessHandle.current().pid());
         MenuItem aboutItem = new MenuItem("About");
-        pidItem.setEnabled(false);
-        aboutItem.setEnabled(false);
+        aboutItem.addActionListener(this::onAbout);
 
         Menu menu2 = new Menu("Help");
-        menu2.add(pidItem);
         menu2.add(aboutItem);
 
         MenuBar menuBar = new MenuBar();
@@ -99,6 +99,21 @@ public class Main extends Frame {
         setAlwaysOnTop(onTop);
     }
 
+    private void onAbout(ActionEvent e) {
+        Panel panel = new Panel();
+        BoxLayout panelLayout = new BoxLayout(panel, BoxLayout.PAGE_AXIS);
+        panel.setLayout(panelLayout);
+        panel.add(new Label("Runtime version: " + System.getProperty("java.vendor") + " " + System.getProperty("java.runtime.version")));
+        panel.add(new Label("PID: " + pid));
+
+        Dialog dialog = new Dialog(this, "About", true);
+        dialog.add(panel);
+        dialog.addWindowListener(new WindowLDispose());
+        dialog.setSize(300, 150);
+        dialog.setLocationRelativeTo(this);
+        dialog.setVisible(true);
+    }
+
     private void componentEnabled(boolean enabled) {
         button.setEnabled(enabled);
         textArea.setEnabled(enabled);
@@ -107,12 +122,7 @@ public class Main extends Frame {
 
     private static void createAndShowGUI() {
         var frame = new Main();
-        frame.addWindowListener(new WindowAdapter() {
-            @Override
-            public void windowClosing(WindowEvent e) {
-                System.exit(0);
-            }
-        });
+        frame.addWindowListener(new WindowLDispose());
         frame.setTitle("Easy Typing");
         frame.setAlwaysOnTop(alwaysOnTopMenu.getState());
         frame.pack();
@@ -139,5 +149,12 @@ public class Main extends Frame {
 
     public static void main(String[] args) {
         SwingUtilities.invokeLater(Main::createAndShowGUI);
+    }
+
+    private static class WindowLDispose extends WindowAdapter {
+        @Override
+        public void windowClosing(WindowEvent e) {
+            e.getWindow().dispose();
+        }
     }
 }
