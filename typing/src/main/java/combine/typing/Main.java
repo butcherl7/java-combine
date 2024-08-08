@@ -6,7 +6,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ItemEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
-import java.util.List;
 import java.util.concurrent.TimeUnit;
 import java.util.function.Supplier;
 
@@ -29,8 +28,9 @@ public class Main extends Frame {
     }
 
     private void init() {
+        setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/icon64.png")));
+
         setLayout(new BorderLayout());
-        setIcon();
         setMenuBar();
 
         var footerPanel = new Panel();
@@ -42,14 +42,6 @@ public class Main extends Frame {
         add(footerPanel, BorderLayout.PAGE_END);
 
         addListener();
-    }
-
-    private void setIcon() {
-        Toolkit toolkit = Toolkit.getDefaultToolkit();
-        Image icon64 = toolkit.getImage(getClass().getResource("/icon64.png"));
-        Image icon128 = toolkit.getImage(getClass().getResource("/icon128.png"));
-        List<Image> icons = List.of(icon64, icon128);
-        setIconImages(icons);
     }
 
     private void setMenuBar() {
