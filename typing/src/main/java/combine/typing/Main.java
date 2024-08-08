@@ -1,5 +1,7 @@
 package combine.typing;
 
+import combine.typing.util.Utils;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -28,7 +30,7 @@ public class Main extends Frame {
     }
 
     private void init() {
-        setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/icon64.png")));
+        setIconImage(Utils.getImage("/icon64.png"));
 
         setLayout(new BorderLayout());
         setMenuBar();
@@ -100,7 +102,7 @@ public class Main extends Frame {
 
         Dialog dialog = new Dialog(this, "About", true);
         dialog.add(panel);
-        dialog.setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/info16.png")));
+        dialog.setIconImage(Utils.getImage("/info16.png"));
         dialog.addWindowListener(new WindowLDispose());
         dialog.setSize(300, 150);
         dialog.setLocationRelativeTo(this);
