@@ -100,6 +100,7 @@ public class Main extends Frame {
 
         Dialog dialog = new Dialog(this, "About", true);
         dialog.add(panel);
+        dialog.setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/info16.png")));
         dialog.addWindowListener(new WindowLDispose());
         dialog.setSize(300, 150);
         dialog.setLocationRelativeTo(this);
