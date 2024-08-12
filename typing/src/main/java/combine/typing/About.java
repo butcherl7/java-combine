@@ -4,8 +4,6 @@ import combine.typing.util.Utils;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
 
 public class About extends Dialog {
 
@@ -21,11 +19,6 @@ public class About extends Dialog {
         panel.add(new Label("PID: " + ProcessHandle.current().pid()));
         add(panel);
         setIconImage(Utils.getImage("/info16.png"));
-        addWindowListener(new WindowAdapter() {
-            @Override
-            public void windowClosing(WindowEvent e) {
-                setVisible(false);
-            }
-        });
+        addWindowListener(new Utils.ComponentInvisible());
     }
 }

@@ -7,8 +7,6 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ItemEvent;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
 import java.util.concurrent.TimeUnit;
 import java.util.function.Supplier;
 
@@ -71,7 +69,7 @@ public class Main extends Frame {
     private void setFrame() {
         setTitle("Easy Typing");
         setMinimumSize(textArea.getSize());
-        addWindowListener(new WindowLExit());
+        addWindowListener(new Utils.SystemExit());
         setAlwaysOnTop(alwaysOnTopMenu.getState());
     }
 
@@ -141,19 +139,5 @@ public class Main extends Frame {
 
     public static void main(String[] args) {
         SwingUtilities.invokeLater(Main::createAndShowGUI);
-    }
-
-    private static class WindowLDispose extends WindowAdapter {
-        @Override
-        public void windowClosing(WindowEvent e) {
-            e.getWindow().dispose();
-        }
-    }
-
-    private static class WindowLExit extends WindowAdapter {
-        @Override
-        public void windowClosing(WindowEvent e) {
-            System.exit(0);
-        }
     }
 }
