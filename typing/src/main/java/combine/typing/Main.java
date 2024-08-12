@@ -34,7 +34,7 @@ public class Main extends Frame {
     }
 
     private void init() {
-        about.setSize(300, 150);
+        about.setSize(300, 120);
         about.setLocationRelativeTo(this);
 
         setIconImage(Utils.getImage("/icon64.png"));
