@@ -32,8 +32,6 @@ public class Main extends Frame {
     }
 
     private void init() {
-        about.setSize(300, 120);
-
         setIconImage(Utils.getImage("/icon64.png"));
         setLayout(new BorderLayout());
 
@@ -49,6 +47,8 @@ public class Main extends Frame {
         setMenuBar();
         setFrame();
     }
+
+    // 设置组件...
 
     private void setMenuBar() {
         Menu menu1 = new Menu("Options");
@@ -104,6 +104,7 @@ public class Main extends Frame {
     }
 
     private void onShowAbout(ActionEvent e) {
+        about.setSize(300, 120);
         about.setLocationRelativeTo(this);
         about.setVisible(true);
     }
