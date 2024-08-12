@@ -22,7 +22,7 @@ public class Main extends Frame {
 
     private Button button;
 
-    private static final long pid = ProcessHandle.current().pid();
+    private About about;
 
     private Main() {
         init();
@@ -33,6 +33,10 @@ public class Main extends Frame {
         textArea = new TextArea("", 10, 50, TextArea.SCROLLBARS_VERTICAL_ONLY);
         textField = new TextField("2000", 5);
         button = new Button("✍");
+        about = new About(this);
+
+        about.setSize(300, 150);
+        about.setLocationRelativeTo(this);
 
         setIconImage(Utils.getImage("/icon64.png"));
         setLayout(new BorderLayout());
@@ -104,19 +108,7 @@ public class Main extends Frame {
     }
 
     private void onAbout(ActionEvent e) {
-        Panel panel = new Panel();
-        BoxLayout panelLayout = new BoxLayout(panel, BoxLayout.PAGE_AXIS);
-        panel.setLayout(panelLayout);
-        panel.add(new Label("Runtime version: " + System.getProperty("java.vendor") + " " + System.getProperty("java.runtime.version")));
-        panel.add(new Label("PID: " + pid));
-
-        Dialog dialog = new Dialog(this, "About", true);
-        dialog.add(panel);
-        dialog.setIconImage(Utils.getImage("/info16.png"));
-        dialog.addWindowListener(new WindowLDispose());
-        dialog.setSize(300, 150);
-        dialog.setLocationRelativeTo(this);
-        dialog.setVisible(true);
+        about.setVisible(true);
     }
 
     private void componentEnabled(boolean enabled) {
