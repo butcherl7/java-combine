@@ -14,27 +14,26 @@ import java.util.function.Supplier;
 
 public class Main extends Frame {
 
-    private CheckboxMenuItem alwaysOnTopMenu;
+    private final CheckboxMenuItem alwaysOnTopMenu;
 
-    private TextArea textArea;
+    private final TextArea textArea;
 
-    private TextField textField;
+    private final TextField textField;
 
-    private Button button;
+    private final Button button;
 
-    private About about;
+    private final About about;
 
     private Main() {
-        init();
-    }
-
-    private void init() {
         alwaysOnTopMenu = new CheckboxMenuItem("Always On Top", false);
         textArea = new TextArea("", 10, 50, TextArea.SCROLLBARS_VERTICAL_ONLY);
         textField = new TextField("2000", 5);
         button = new Button("✍");
         about = new About(this);
+        init();
+    }
 
+    private void init() {
         about.setSize(300, 150);
         about.setLocationRelativeTo(this);
 
