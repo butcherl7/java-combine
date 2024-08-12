@@ -13,15 +13,13 @@ import java.util.function.Supplier;
 
 public class Main extends Frame {
 
-    private static final TextArea textArea = new TextArea("", 10, 50, TextArea.SCROLLBARS_VERTICAL_ONLY);
+    private CheckboxMenuItem alwaysOnTopMenu;
 
-    private static final TextField textField = new TextField("2000", 5);
+    private TextArea textArea;
 
-    private static final Label label = new Label("Delay(ms):");
+    private TextField textField;
 
-    private static final Button button = new Button("✍");
-
-    private static final CheckboxMenuItem alwaysOnTopMenu = new CheckboxMenuItem("Always On Top", false);
+    private Button button;
 
     private static final long pid = ProcessHandle.current().pid();
 
@@ -30,13 +28,16 @@ public class Main extends Frame {
     }
 
     private void init() {
-        setIconImage(Utils.getImage("/icon64.png"));
+        alwaysOnTopMenu = new CheckboxMenuItem("Always On Top", false);
+        textArea = new TextArea("", 10, 50, TextArea.SCROLLBARS_VERTICAL_ONLY);
+        textField = new TextField("2000", 5);
+        button = new Button("✍");
 
+        setIconImage(Utils.getImage("/icon64.png"));
         setLayout(new BorderLayout());
-        setMenuBar();
 
         var footerPanel = new Panel();
-        footerPanel.add(label);
+        footerPanel.add(new Label("Delay(ms):"));
         footerPanel.add(textField);
         footerPanel.add(button);
 
@@ -44,13 +45,14 @@ public class Main extends Frame {
         add(footerPanel, BorderLayout.PAGE_END);
 
         addListener();
+        setMenuBar();
+        setFrame();
     }
 
     private void setMenuBar() {
         Menu menu1 = new Menu("Options");
         menu1.add(alwaysOnTopMenu);
 
-        // MenuItem pidItem = new MenuItem("PID: " + ProcessHandle.current().pid());
         MenuItem aboutItem = new MenuItem("About");
         aboutItem.addActionListener(this::onAbout);
 
@@ -61,6 +63,13 @@ public class Main extends Frame {
         menuBar.add(menu1);
         menuBar.add(menu2);
         setMenuBar(menuBar);
+    }
+
+    private void setFrame() {
+        setTitle("Easy Typing");
+        setMinimumSize(textArea.getSize());
+        addWindowListener(new WindowLExit());
+        setAlwaysOnTop(alwaysOnTopMenu.getState());
     }
 
     private void addListener() {
@@ -117,13 +126,9 @@ public class Main extends Frame {
 
     private static void createAndShowGUI() {
         var frame = new Main();
-        frame.addWindowListener(new WindowLExit());
-        frame.setTitle("Easy Typing");
-        frame.setAlwaysOnTop(alwaysOnTopMenu.getState());
         frame.pack();
         frame.setVisible(true);
         frame.setLocationRelativeTo(null);
-        frame.setMinimumSize(textArea.getSize());
     }
 
     static <T> T runCatch(Supplier<T> supplier) {
