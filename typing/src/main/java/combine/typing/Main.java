@@ -1,5 +1,6 @@
 package combine.typing;
 
+import combine.typing.util.TypeUtils;
 import combine.typing.util.Utils;
 
 import javax.swing.*;

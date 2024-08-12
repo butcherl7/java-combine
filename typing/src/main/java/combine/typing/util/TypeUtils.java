@@ -1,4 +1,4 @@
-package combine.typing;
+package combine.typing.util;
 
 import java.awt.*;
 import java.awt.event.KeyEvent;
