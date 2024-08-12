@@ -35,7 +35,6 @@ public class Main extends Frame {
 
     private void init() {
         about.setSize(300, 120);
-        about.setLocationRelativeTo(this);
 
         setIconImage(Utils.getImage("/icon64.png"));
         setLayout(new BorderLayout());
@@ -58,7 +57,7 @@ public class Main extends Frame {
         menu1.add(alwaysOnTopMenu);
 
         MenuItem aboutItem = new MenuItem("About");
-        aboutItem.addActionListener(this::onAbout);
+        aboutItem.addActionListener(this::onShowAbout);
 
         Menu menu2 = new Menu("Help");
         menu2.add(aboutItem);
@@ -106,7 +105,8 @@ public class Main extends Frame {
         setAlwaysOnTop(onTop);
     }
 
-    private void onAbout(ActionEvent e) {
+    private void onShowAbout(ActionEvent e) {
+        about.setLocationRelativeTo(this);
         about.setVisible(true);
     }
 
