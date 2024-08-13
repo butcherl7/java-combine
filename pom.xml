@@ -13,8 +13,8 @@
     <modules>
         <module>typing</module>
         <module>bilibili</module>
-        <module>webapp</module>
-        <module>jakarta</module>
+        <module>servlet</module>
+        <module>java</module>
     </modules>
 
     <properties>

@@ -1,4 +1,4 @@
-package combine.webapp.filter;
+package combine.servlet.filter;
 
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;

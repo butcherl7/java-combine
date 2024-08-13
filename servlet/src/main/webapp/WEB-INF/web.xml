@@ -8,12 +8,12 @@
 
     <filter>
         <filter-name>GlobalFilter</filter-name>
-        <filter-class>combine.webapp.filter.GlobalFilter</filter-class>
+        <filter-class>combine.servlet.filter.GlobalFilter</filter-class>
     </filter>
 
     <filter>
         <filter-name>TestFilter</filter-name>
-        <filter-class>combine.webapp.filter.TestFilter</filter-class>
+        <filter-class>combine.servlet.filter.TestFilter</filter-class>
     </filter>
 
     <filter-mapping>
