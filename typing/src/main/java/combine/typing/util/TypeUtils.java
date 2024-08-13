@@ -79,8 +79,8 @@ public class TypeUtils {
 
             case '-' -> doType(KeyEvent.VK_MINUS);
             case '=' -> doType(KeyEvent.VK_EQUALS);
-            case '_' -> doShiftType(KeyEvent.VK_UNDERSCORE);
-            case '+' -> doShiftType(KeyEvent.VK_MINUS);
+            case '_' -> doShiftType(KeyEvent.VK_MINUS);
+            case '+' -> doShiftType(KeyEvent.VK_EQUALS);
 
             case '[' -> doType(KeyEvent.VK_OPEN_BRACKET);
             case ']' -> doType(KeyEvent.VK_CLOSE_BRACKET);
