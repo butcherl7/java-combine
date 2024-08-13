@@ -6,6 +6,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.PrintWriter;
+import java.io.Serial;
 import java.nio.charset.StandardCharsets;
 
 /**
@@ -15,6 +16,7 @@ import java.nio.charset.StandardCharsets;
 @WebServlet(name = "ExampleServlet", urlPatterns = "/example")
 public class ExampleServlet extends HttpServlet {
 
+    @Serial
     private static final long serialVersionUID = 8775391570409166030L;
 
     @Override

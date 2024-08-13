@@ -8,6 +8,7 @@ import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.io.Serial;
 
 /**
  * @author Butcher
@@ -15,6 +16,7 @@ import java.io.PrintWriter;
  */
 public class GlobalFilter extends HttpFilter {
 
+    @Serial
     private static final long serialVersionUID = 20249921314707892L;
 
     @Override
