@@ -14,7 +14,7 @@
         <module>typing</module>
         <module>bilibili</module>
         <module>webapp</module>
-        <module>jesson</module>
+        <module>jakarta</module>
     </modules>
 
     <properties>
