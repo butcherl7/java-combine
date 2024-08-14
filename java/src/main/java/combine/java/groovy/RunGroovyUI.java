@@ -1,18 +1,16 @@
-package combine.java.sc;
+package combine.java.groovy;
 
-import groovy.lang.Binding;
-import groovy.lang.GroovyShell;
+import lombok.extern.slf4j.Slf4j;
 
 import javax.swing.*;
 import javax.swing.filechooser.FileFilter;
 import javax.swing.filechooser.FileSystemView;
-import javax.swing.text.BadLocationException;
-import javax.swing.text.SimpleAttributeSet;
-import javax.swing.text.StyleConstants;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.io.File;
+import java.util.concurrent.ExecutionException;
 
+@Slf4j
 public class RunGroovyUI extends JFrame {
 
     private final JFileChooser fc = new JFileChooser();
@@ -58,24 +56,12 @@ public class RunGroovyUI extends JFrame {
         if (returnVal == JFileChooser.APPROVE_OPTION) {
             File file = fc.getSelectedFile();
             textField.setText(file.getAbsolutePath());
-
-            var result = "";
-            var doc = textPane.getStyledDocument();
-            var attributeSet = new SimpleAttributeSet();
-
-            Binding binding = new Binding();
-            GroovyShell groovyShell = new GroovyShell(binding);
+            RunGroovyWorker groovyWorker = new RunGroovyWorker(file, textPane);
+            groovyWorker.execute();
             try {
-                result = String.valueOf(groovyShell.evaluate(file));
-                StyleConstants.setForeground(attributeSet, Color.BLUE);
-            } catch (Exception ex) {
-                result = ex.getMessage();
-                StyleConstants.setForeground(attributeSet, Color.RED);
-            } finally {
-                try {
-                    doc.insertString(doc.getLength(), result, attributeSet);
-                } catch (BadLocationException ignored) {
-                }
+                log.debug(groovyWorker.get());
+            } catch (InterruptedException | ExecutionException ex) {
+                log.error(ex.getMessage(), ex);
             }
         }
     }
