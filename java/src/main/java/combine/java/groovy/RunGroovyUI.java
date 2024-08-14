@@ -1,16 +1,12 @@
 package combine.java.groovy;
 
-import lombok.extern.slf4j.Slf4j;
-
 import javax.swing.*;
 import javax.swing.filechooser.FileFilter;
 import javax.swing.filechooser.FileSystemView;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.io.File;
-import java.util.concurrent.ExecutionException;
 
-@Slf4j
 public class RunGroovyUI extends JFrame {
 
     private final JFileChooser fc = new JFileChooser();
@@ -52,17 +48,14 @@ public class RunGroovyUI extends JFrame {
     }
 
     private void handleAction(ActionEvent e) {
+        textPane.setText(null);
+        textField.setText(null);
+
         int returnVal = fc.showOpenDialog(this);
         if (returnVal == JFileChooser.APPROVE_OPTION) {
             File file = fc.getSelectedFile();
             textField.setText(file.getAbsolutePath());
-            RunGroovyWorker groovyWorker = new RunGroovyWorker(file, textPane);
-            groovyWorker.execute();
-            try {
-                log.debug(groovyWorker.get());
-            } catch (InterruptedException | ExecutionException ex) {
-                log.error(ex.getMessage(), ex);
-            }
+            new RunGroovyWorker(file, textPane).execute();
         }
     }
 

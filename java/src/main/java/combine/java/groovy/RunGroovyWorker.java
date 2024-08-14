@@ -2,6 +2,7 @@ package combine.java.groovy;
 
 import groovy.lang.Binding;
 import groovy.lang.GroovyShell;
+import lombok.extern.slf4j.Slf4j;
 
 import javax.swing.*;
 import javax.swing.text.BadLocationException;
@@ -10,7 +11,8 @@ import javax.swing.text.StyleConstants;
 import java.awt.*;
 import java.io.File;
 
-public final class RunGroovyWorker extends SwingWorker<String, Void> {
+@Slf4j
+public final class RunGroovyWorker extends SwingWorker<Void, Void> {
 
     private final File groovyFile;
 
@@ -23,7 +25,7 @@ public final class RunGroovyWorker extends SwingWorker<String, Void> {
     }
 
     @Override
-    protected String doInBackground() {
+    protected Void doInBackground() {
         var result = "";
         var doc = textPane.getStyledDocument();
         var attributeSet = new SimpleAttributeSet();
@@ -39,9 +41,11 @@ public final class RunGroovyWorker extends SwingWorker<String, Void> {
         } finally {
             try {
                 doc.insertString(doc.getLength(), result, attributeSet);
-            } catch (BadLocationException ignored) {
+            } catch (BadLocationException e) {
+                log.error(e.getLocalizedMessage(), e);
             }
         }
-        return groovyFile.getName() + " execution end.";
+        log.debug("Execution '{}' end.", groovyFile.getName());
+        return null;
     }
 }
